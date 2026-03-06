@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Dark Theme (default) ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --bg-primary: #0a0d12;
+  --bg-surface: #0d1117;
+  --bg-surface-2: #161b22;
+  --bg-surface-3: #1c2128;
+  --border: rgba(201, 168, 76, 0.2);
+  --border-subtle: rgba(255,255,255,0.06);
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #3d4452;
+  --accent-gold: #d4a843;
+  --accent-green: #22c55e;
+}
+
+/* ── Light Theme ── */
+:root.light {
+  --gold: #a07828;
+  --gold-light: #c9941c;
+  --bg-primary: #f5f0e8;
+  --bg-surface: #fdfaf4;
+  --bg-surface-2: #f0ebe0;
+  --bg-surface-3: #e8e0d0;
+  --border: rgba(160, 120, 40, 0.25);
+  --border-subtle: rgba(0,0,0,0.08);
+  --text-primary: #1a1208;
+  --text-secondary: #5a4a2a;
+  --text-muted: #a89060;
+  --accent-gold: #b8860b;
+  --accent-green: #16a34a;
+}
+
+/* ── Base ── */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface-2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ── Noise overlay ── */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* ── Utilities ── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #8a6520 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-green { box-shadow: 0 0 20px rgba(34,197,94,0.15); }
+.glow-red   { box-shadow: 0 0 20px rgba(239,68,68,0.15); }
+
+textarea:focus { outline: none; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-up { animation: fadeUp 0.6s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+
+/* ── Light theme overrides ── */
+:root.light body,
+:root.light .noise {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+:root.light header {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border) !important;
+}
+
+:root.light .bg-surface {
+  background-color: var(--bg-surface) !important;
+}
+
+/* Hardcoded Tailwind dark bg overrides */
+:root.light [class*="bg-\[#0a0d12\]"],
+:root.light [class*="bg-\[#0d1117\]"],
+:root.light [class*="bg-\[#161b22\]"],
+:root.light [class*="bg-\[#1c2128\]"] {
+  background-color: var(--bg-surface-2) !important;
+}
+
+/* Text overrides */
+:root.light [class*="text-\[#e6edf3\]"],
+:root.light [class*="text-\[#8b949e\]"] {
+  color: var(--text-primary) !important;
+}
+
+/* Border overrides */
+:root.light [class*="border-\["] {
+  border-color: var(--border) !important;
+}
+
+/* Form elements */
+:root.light textarea,
+:root.light input {
+  background-color: var(--bg-surface-2) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+:root.light textarea::placeholder,
+:root.light input::placeholder {
+  color: var(--text-muted) !important;
+}
+
+
+/* ── Light theme: text & UI fixes ── */
+
+/* Header: ClaimAI title & subtitle */
+:root.light header h1 {
+  color: var(--text-primary) !important;
+}
+:root.light header p {
+  color: var(--text-secondary) !important;
+}
+
+/* Header: Policy Loaded & API Live pills */
+:root.light .bg-blue-950\/40 {
+  background-color: #dbeafe !important;
+  border-color: #93c5fd !important;
+}
+:root.light .text-blue-400 {
+  color: #1d4ed8 !important;
+}
+:root.light .bg-green-950\/40 {
+  background-color: #dcfce7 !important;
+  border-color: #86efac !important;
+}
+:root.light .text-green-500 {
+  color: #15803d !important;
+}
+
+/* Hero: "Insurance Claim" white text */
+:root.light .text-slate-100 {
+  color: var(--text-primary) !important;
+}
+
+/* Hero: subtitle text */
+:root.light .text-slate-500 {
+  color: var(--text-secondary) !important;
+}
+
+/* Feature pills (LLaMA, ChromaDB etc) */
+:root.light .bg-\[#0d1117\] {
+  background-color: var(--bg-surface-2) !important;
+  border-color: var(--border) !important;
+}
+:root.light .text-slate-500 {
+  color: var(--text-secondary) !important;
+}
+
+/* Tab nav background */
+:root.light .bg-\[#0d1117\] {
+  background-color: var(--bg-surface-2) !important;
+}
+
+/* Active tab */
+:root.light .bg-slate-800 {
+  background-color: var(--bg-surface-3) !important;
+}
+:root.light .text-slate-100 {
+  color: var(--text-primary) !important;
+}
+
+/* Inactive tab text */
+:root.light .text-slate-500 {
+  color: var(--text-secondary) !important;
+}
+:root.light .text-slate-700 {
+  color: var(--text-muted) !important;
+}
+
+/* Panel cards */
+:root.light .bg-\[#0d1117\].rounded-2xl,
+:root.light .rounded-2xl.border.bg-\[#0d1117\] {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border) !important;
+}
+
+/* Section header divider lines */
+:root.light .bg-slate-800\/80 {
+  background-color: var(--border) !important;
+}
+:root.light .text-slate-600 {
+  color: var(--text-secondary) !important;
+}
+
+/* Empty state box */
+:root.light .bg-slate-900 {
+  background-color: var(--bg-surface-2) !important;
+}
+:root.light .border-slate-800 {
+  border-color: var(--border) !important;
+}
+
+/* Footer */
+:root.light footer {
+  border-color: var(--border) !important;
+}
+:root.light .text-slate-700 {
+  color: var(--text-muted) !important;
+}
+
+/* Navbar border */
+:root.light .border-slate-800\/60 {
+  border-color: var(--border) !important;
+}
+
+/* bg-[#0a0d12] main wrapper */
+:root.light .bg-\[#0a0d12\] {
+  background-color: var(--bg-primary) !important;
+}
+
+/* backdrop header */
+:root.light .bg-\[#0a0d12\]\/90 {
+  background-color: rgba(245, 240, 232, 0.92) !important;
+}
