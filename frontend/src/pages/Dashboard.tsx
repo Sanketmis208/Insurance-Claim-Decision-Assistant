@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import ThemeToggle from '../components/ThemeToggle'  // ← removed useTheme import
 
 import {
-  Shield, Zap, Brain, GitBranch, ExternalLink,
+  Shield, Zap, Brain, GitBranch,
   FileSearch, ClipboardCheck, Database, ChevronRight
 } from 'lucide-react'
 import clsx from 'clsx'
@@ -144,15 +144,7 @@ export default function Dashboard() {
 
             {/* ← removed theme/onToggle props, ThemeToggle manages itself */}
             <ThemeToggle />
-            <a
-              href="http://localhost:8002/docs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-mono text-slate-600 hover:text-yellow-600 transition-colors"
-            >
-              <ExternalLink size={12} />
-              Swagger
-            </a>
+            
           </div>
         </div>
       </header>

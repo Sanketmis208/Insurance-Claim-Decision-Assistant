@@ -6,9 +6,10 @@ Changes from original:
       so the first /upload-policy request isn't slow
     - Added /uploads and /chroma_db directory creation on startup
 """
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import logging
-import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -28,7 +29,7 @@ async def lifespan(app: FastAPI):
 
     # Ensure required directories exist
     os.makedirs("./uploads", exist_ok=True)
-    os.makedirs("./chroma_db", exist_ok=True)
+    os.makedirs(os.getenv("CHROMA_PERSIST_DIR", "./chroma_db"), exist_ok=True)
     logger.info("📁 Directories ready: ./uploads, ./chroma_db")
 
     # Pre-warm embedding model (downloads on first run, cached after)

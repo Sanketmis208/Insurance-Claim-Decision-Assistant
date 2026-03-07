@@ -6,12 +6,15 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore",          # ← Ignore unknown env vars silently
     )
     groq_api_key: str = ""
     app_title: str = "Insurance Claim Decision Assistant"
     app_version: str = "1.0.0"
     debug: bool = False
     log_level: str = "INFO"
+    chroma_persist_dir: str = "./chroma_db"   # ← ADD THIS
+    upload_dir: str = "./uploads"             # ← ADD THIS
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
