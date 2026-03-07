@@ -15,7 +15,7 @@ groq
 
 # ── RAG: Embeddings ──
 sentence-transformers
-torch==2.6.0
+torch
 
 # ── RAG: Vector Database ──
 chromadb==0.5.23
