@@ -54,7 +54,7 @@ export interface PolicyStatusResponse {
 // ── Axios Client ───────────────────────────────────────────────────────────
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8002/api/v1',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8002',
   headers: { 'Content-Type': 'application/json' },
   timeout: 60000,
 })

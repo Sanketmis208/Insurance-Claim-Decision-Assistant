@@ -5,6 +5,7 @@ from functools import lru_cache
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from app.models import ExtractedClaimParameters
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -38,10 +39,15 @@ extraction_prompt = ChatPromptTemplate.from_messages([
 
 @lru_cache(maxsize=1)
 def _get_llm() -> ChatGroq:
+    api_key = settings.groq_api_key or os.getenv("GROQ_API_KEY", "")
+    if not api_key:
+        raise ValueError(
+            "GROQ_API_KEY is not set. Add it to your .env file or set it as an environment variable."
+        )
     return ChatGroq(
         model="llama-3.3-70b-versatile",
         temperature=0,
-        api_key=os.getenv("GROQ_API_KEY"),
+        api_key=api_key,
     )
 
 

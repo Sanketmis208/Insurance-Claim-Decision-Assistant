@@ -27,6 +27,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain.schema import Document
 
 from app.vector_store import get_vector_store, collection_exists_and_has_docs
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 TOP_K        = int(os.getenv("RAG_TOP_K", "3"))
 GROQ_MODEL   = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_API_KEY = settings.groq_api_key or os.getenv("GROQ_API_KEY", "")
 
 
 # ── RAG Prompt Template ────────────────────────────────────────────────────
